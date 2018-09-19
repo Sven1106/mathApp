@@ -6,11 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { MathTypeService } from './shared/mathTypes/mathType.service';
+import { MathTypeComponent } from './math-type/math-type.component';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage
+    //,MathTypeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +27,7 @@ import { HomePage } from '../pages/home/home';
   providers: [
     StatusBar,
     SplashScreen,
+    MathTypeService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

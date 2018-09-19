@@ -1,14 +1,26 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+  <h4>Vælg regneart(er):</h4>
+<div class="mathTypes">
+  <!-- <div class="mathType" [class.selected]="value.isSelected==true" (click)="value.isSelected = !value.isSelected" *ngFor="let value of objectValues(mathTypeService.getMathTypes)" [value]='value'>
+    <span class="text">
+      {{value.text}}
+    </span>
+  </div> -->
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+</div>
+<h4>Vælg antal cifre:</h4>
+<div class="digits">
+  <select (change)="onChange($event.target)" id="input1">
+    <option [selected]="input1 == '1'" value="1">1</option>
+    <option [selected]="input1 == '2'" value="2">2</option>
+    <option [selected]="input1 == '3'" value="3">3</option>
+    <option [selected]="input1 == '4'" value="4">4</option>
+    <option [selected]="input1 == '5'" value="5">5</option>
+  </select>
+  <select (change)="onChange($event.target)" id="input2">
+    <option [selected]="input2 == '1'" value="1">1</option>
+    <option [selected]="input2 == '2'" value="2">2</option>
+    <option [selected]="input2 == '3'" value="3">3</option>
+    <option [selected]="input2 == '4'" value="4">4</option>
+    <option [selected]="input2 == '5'" value="5">5</option>
+    </select>
+</div>
