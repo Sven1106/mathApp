@@ -1,26 +1,18 @@
-  <h4>Vælg regneart(er):</h4>
+<h4>Vælg regneart(er):</h4>
 <div class="mathTypes">
-  <!-- <div class="mathType" [class.selected]="value.isSelected==true" (click)="value.isSelected = !value.isSelected" *ngFor="let value of objectValues(mathTypeService.getMathTypes)" [value]='value'>
+  <div class="mathType" [class.selected]="mathType.isSelected==true" (click)="mathType.isSelected = !mathType.isSelected"
+    *ngFor="let mathType of mathTypeService.getMathTypes">
     <span class="text">
-      {{value.text}}
+      {{mathType.text}}
     </span>
-  </div> -->
-
+  </div>
 </div>
 <h4>Vælg antal cifre:</h4>
 <div class="digits">
   <select (change)="onChange($event.target)" id="input1">
-    <option [selected]="input1 == '1'" value="1">1</option>
-    <option [selected]="input1 == '2'" value="2">2</option>
-    <option [selected]="input1 == '3'" value="3">3</option>
-    <option [selected]="input1 == '4'" value="4">4</option>
-    <option [selected]="input1 == '5'" value="5">5</option>
+    <option *ngFor="let item of arrayOne(mathTypeService.maxDiget); let i = index;" [selected]="mathTypeService.input1 == i+1">{{i+1}}</option>
   </select>
   <select (change)="onChange($event.target)" id="input2">
-    <option [selected]="input2 == '1'" value="1">1</option>
-    <option [selected]="input2 == '2'" value="2">2</option>
-    <option [selected]="input2 == '3'" value="3">3</option>
-    <option [selected]="input2 == '4'" value="4">4</option>
-    <option [selected]="input2 == '5'" value="5">5</option>
-    </select>
+    <option *ngFor="let item of arrayOne(mathTypeService.maxDiget); let i = index;" [selected]="mathTypeService.input2 == i+1">{{i+1}}</option>
+  </select>
 </div>

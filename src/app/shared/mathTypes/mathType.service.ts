@@ -1,28 +1,34 @@
-import { IGroupMathType } from './mathType';
+import { IMathType } from './mathType';
 
 export class MathTypeService {
     input1: number = 1;
     input2: number = 1;
-    getMathTypes: IGroupMathType = {
-        Addition: {
+    maxDiget: number = 5;
+    getMathTypes: IMathType[] = [
+        {
+            title: 'Addition',
             text: '+',
             operator: '+',
             isSelected: false
         },
-        Subtraction: {
+        {
+            title: 'Subtraction',
             text: '-',
             operator: '-',
             isSelected: false
         },
-        Multiplication: {
+        {
+
+            title: 'Multiplication',
             text: '×',
             operator: '*',
             isSelected: false
         },
-        Division: {
+        {
+            title: 'Division',
             text: '÷',
             operator: '/',
             isSelected: false
         }
-    };
+    ]
 }

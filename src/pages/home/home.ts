@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { IGroupMathType } from '../../app/shared/mathTypes/mathType';
+import { IMathType } from '../../app/shared/mathTypes/mathType';
 import { MathTypeService } from '../../app/shared/mathTypes/mathType.service';
 
 @Component({
@@ -8,11 +8,15 @@ import { MathTypeService } from '../../app/shared/mathTypes/mathType.service';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  mathTypes: IGroupMathType;
+  mathTypes: IMathType[];
   keys: String[];
   input1: number;
   input2: number;
+  arrayOne(n: number): any[] {
+    return Array(n);
+  }
   constructor(public navCtrl: NavController, private mathTypeService: MathTypeService) {
+    
   }
   onChange(target: HTMLSelectElement) {
     switch (target.id) {
