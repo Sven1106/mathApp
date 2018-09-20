@@ -1,4 +1,6 @@
+import { CalculatePage } from './../calculate/calculate';
 import { Component } from '@angular/core';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { NavController } from 'ionic-angular';
 import { IMathType } from '../../app/shared/mathTypes/mathType';
 import { MathTypeService } from '../../app/shared/mathTypes/mathType.service';
@@ -12,11 +14,17 @@ export class HomePage {
   keys: String[];
   input1: number;
   input2: number;
+  options: NativeTransitionOptions;
   arrayOne(n: number): any[] {
     return Array(n);
   }
-  constructor(public navCtrl: NavController, private mathTypeService: MathTypeService) {
-    
+  constructor(private nativePageTransitions: NativePageTransitions, public navCtrl: NavController, private mathTypeService: MathTypeService) {
+     this.options = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay:50
+    }
   }
   onChange(target: HTMLSelectElement) {
     switch (target.id) {
@@ -29,8 +37,14 @@ export class HomePage {
       default:
         break;
     }
-    // console.log(this.input1);
-    // console.log(this.input2);
-    console.log(this.mathTypeService);
+  }
+
+  ionViewWillLeave() {
+    this.nativePageTransitions.slide(this.options)   
+   }
+
+  onClick() {
+    this.nativePageTransitions.slide(this.options);
+    this.navCtrl.setRoot(CalculatePage);
   }
 }
