@@ -5,12 +5,12 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CalculatePage } from '../pages/calculate/calculate';
 
-import { MathTypeService } from './shared/mathTypes/mathType.service';
+import { MathService } from './shared/math/math.service';
+import { Helper } from './shared/math/helper';
 
 @NgModule({
   declarations: [
@@ -33,8 +33,9 @@ import { MathTypeService } from './shared/mathTypes/mathType.service';
     ScreenOrientation,
     StatusBar,
     SplashScreen,
-    MathTypeService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Helper,
+    MathService,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

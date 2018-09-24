@@ -1,9 +1,9 @@
 import { IMathType } from './mathType';
 
-export class MathTypeService {
+export class MathService {
     input1: number = 1;
     input2: number = 1;
-    maxDiget: number = 5;
+    maxDiget: number = 3;
     getMathTypes: IMathType[] = [
         {
             title: 'Addition',
