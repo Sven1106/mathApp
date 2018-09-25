@@ -52,13 +52,11 @@ export class CalculatePage {
         break;
 
       case 'Division':
-        // console.log(this.isPrime(rndInt2));
-        // console.log(rndInt1 + '/' + rndInt2)
         if (this.rndInt2 > this.rndInt1) {
-          this.getNearestDivisible(this.rndInt2, this.rndInt1);
+          this.getDivisionEquation(this.helper.getDigitRange(this.mathService.input2), this.rndInt1);
         }
         else {
-          this.getNearestDivisible(this.rndInt1, this.rndInt2);
+          this.getDivisionEquation(this.helper.getDigitRange(this.mathService.input1), this.rndInt2);
         }
         break;
       default:
@@ -83,39 +81,15 @@ export class CalculatePage {
     return this.helper.getRndInt(inputRange.smallest, inputRange.biggest);
   }
 
-  getNearestDivisible(x, y) {
-    if (true) {
-      let remainder = x % y;
-      if (remainder > y * 0.5) {
-        console.log('Recalculate: ' + x + '/' + y);
-        this.getNearestDivisible(x, y - 1);
-      }
-      else {
-
-        if (x - remainder != y) { // if x and y isnt equal
-          console.log('remove remainder: (' + x + '-' + remainder + ')/' + y);
-          return console.log(x - remainder + '/' + y);
-        }
-        else {
-          console.log('doing magic because: '+ (x - remainder) +'/' + y);
-          this.rndInt1 = this.getRndInputInt(this.mathService.input1);
-          this.rndInt2 = this.getRndInputInt(this.mathService.input2);
-          if (this.rndInt2 > this.rndInt1) {
-            this.getNearestDivisible(this.rndInt2, this.rndInt1);
-          }
-          else {
-            this.getNearestDivisible(this.rndInt1, this.rndInt2);
-          }
-        }
-
-
-      }
-    }
-    else {
-
-    }
-
+   getDivisionEquation(x, y){
+    let nummeratorRange = x;
+    let denominator = y; //Tæller
+    let vRange = this.helper.getValRange(nummeratorRange.smallest, nummeratorRange.biggest, denominator);
+    let value = this.helper.getRndInt(vRange.smallest, vRange.biggest)
+    let nummerator = denominator * value; // select random number in the valueRange
+    return console.log(nummerator + '/' + denominator);
   }
+
   isPrime(num) {
     for (var i = 2; i < num; i++)
       if (num % i === 0) return false;
