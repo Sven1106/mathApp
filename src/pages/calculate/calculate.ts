@@ -6,7 +6,6 @@ import { HomePage } from '../home/home';
 import { Helper } from '../../app/shared/math/helper';
 import { MathService } from '../../app/shared/math/math.service';
 import { IMathType } from '../../app/shared/math/mathType';
-import * as RandomJs from 'random-js';
 
 @Component({
   selector: 'page-calculate',
@@ -14,50 +13,49 @@ import * as RandomJs from 'random-js';
 })
 export class CalculatePage {
   helper = new Helper();
-  randomJs = new RandomJs();
   blah: number = 0;
-  rndInt1;
-  rndInt2;
+  firstVarible;
+  secondVariable;
+  equation;
+  result;
   constructor(private nativePageTransitions: NativePageTransitions, public navCtrl: NavController, public navParams: NavParams, public mathService: MathService) {
 
   }
   ngOnInit() {
 
     let mathTypes: IMathType[] = this.mathService.getMathTypes.filter(e => e.isSelected == true).map(e => e);
-    let randomMathType = mathTypes[this.randomJs.integer(0, mathTypes.length - 1)];
+    let randomMathType = mathTypes[this.helper.getRndInt(0, mathTypes.length - 1)];
 
-    this.rndInt1 = this.getRndInputInt(this.mathService.input1);
-    this.rndInt2 = this.getRndInputInt(this.mathService.input2);
-    // let rnd = {
-    //   input1: this.getRndInputInt(this.mathService.input1),
-    //   input2: this.getRndInputInt(this.mathService.input2)
-    // }
+    this.firstVarible = this.getRndInputInt(this.mathService.input1);
+    this.secondVariable = this.getRndInputInt(this.mathService.input2);
 
-    // console.log(rnd);
-    // console.log(rndInt1);
-    // console.log(rndInt2);
     switch (randomMathType.title) {
       case 'Addition':
+        this.equation = this.firstVarible + ' ' + randomMathType.operator + ' ' + this.secondVariable;
+        this.result = this.firstVarible + this.secondVariable;
+        break;
       case 'Multiplication':
-        console.log(this.rndInt1 + ' ' + randomMathType.operator + ' ' + this.rndInt2);
+        this.equation = this.firstVarible + ' ' + randomMathType.operator + ' ' + this.secondVariable;
+        this.result = this.firstVarible * this.secondVariable;
         break;
 
       case 'Subtraction':
-        if (this.rndInt2 > this.rndInt1) {
-          console.log(this.rndInt2 + ' ' + randomMathType.operator + ' ' + this.rndInt1);
+        if (this.secondVariable > this.firstVarible) {
+          this.equation = this.secondVariable + ' ' + randomMathType.operator + ' ' + this.firstVarible;
+          this.result = this.firstVarible - this.secondVariable;
+
         }
         else {
-          console.log(this.rndInt1 + ' ' + randomMathType.operator + ' ' + this.rndInt2);
+          this.equation = this.firstVarible + ' ' + randomMathType.operator + ' ' + this.secondVariable;
+          this.result = this.firstVarible - this.secondVariable;
+
         }
         break;
 
       case 'Division':
-        if (this.rndInt2 > this.rndInt1) {
-          this.getDivisionEquation(this.helper.getDigitRange(this.mathService.input2), this.rndInt1);
-        }
-        else {
-          this.getDivisionEquation(this.helper.getDigitRange(this.mathService.input1), this.rndInt2);
-        }
+        this.getDivisionValuesFromDigits(this.mathService.input1, this.mathService.input2);
+        this.equation = this.firstVarible + ' ' + randomMathType.operator + ' ' + this.secondVariable;
+        this.result = this.firstVarible / this.secondVariable;
         break;
       default:
         alert('Incorrect mathType was provided');
@@ -66,12 +64,12 @@ export class CalculatePage {
 
   }
   goBack() {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    }
+    // let options: NativeTransitionOptions = {
+    //   direction: 'right',
+    //   duration: 400,
+    //   slowdownfactor: -1,
+    //   iosdelay: 50
+    // }
     // this.nativePageTransitions.slide(options);
     this.navCtrl.setRoot(HomePage);
   }
@@ -81,18 +79,26 @@ export class CalculatePage {
     return this.helper.getRndInt(inputRange.smallest, inputRange.biggest);
   }
 
-   getDivisionEquation(x, y){
-    let nummeratorRange = x;
-    let denominator = y; //Tæller
-    let vRange = this.helper.getValRange(nummeratorRange.smallest, nummeratorRange.biggest, denominator);
-    let value = this.helper.getRndInt(vRange.smallest, vRange.biggest)
-    let nummerator = denominator * value; // select random number in the valueRange
-    return console.log(nummerator + '/' + denominator);
+  getDivisionValuesFromDigits(biggestVal, smallestVal) {
+    let nummeratorRange = this.helper.getDigitRange(biggestVal);
+    let denominatorRange = this.helper.getDigitRange(smallestVal);
+    let denominator = (biggestVal != smallestVal ? this.helper.getRndInt(denominatorRange.smallest, denominatorRange.biggest)
+      : this.helper.getRndInt(denominatorRange.smallest, Math.floor(denominatorRange.biggest / 2)));
+    let resultRange = {
+      smallest: ((nummeratorRange.smallest + (denominator - (nummeratorRange.smallest % denominator))) / denominator),
+      biggest: Math.floor(nummeratorRange.biggest / denominator)
+    };
+    let result = this.helper.getRndInt(resultRange.smallest != 1 ? resultRange.smallest : 2, resultRange.biggest)
+    let nummerator = denominator * result; // select random number in the valueRange
+    this.firstVarible = nummerator;
+    this.secondVariable = denominator;
   }
 
-  isPrime(num) {
-    for (var i = 2; i < num; i++)
-      if (num % i === 0) return false;
-    return num !== 1 && num !== 0;
+  checkIfCorrect(e){
+   // e.preventDefault();
+    // if(){
+
+    // }
+    console.log(e)
   }
 }

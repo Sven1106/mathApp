@@ -1,12 +1,21 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>Calculate</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <button ion-button small (click)="goBack()">Back</button> -->
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-  <button ion-button full (click)="goBack()">Back</button>
+  <div class="equation">
+    {{equation}}
+  </div>
+  <form action="">
+      <input type="number" pattern="\d*" />
+      <input type="submit" value="submit"  (click)="checkIfCorrect($event);">
+  </form>
+
 </ion-content>

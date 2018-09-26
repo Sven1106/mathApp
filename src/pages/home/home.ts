@@ -33,9 +33,13 @@ export class HomePage {
     switch (target.id) {
       case 'input1':
         this.mathService.input1 = parseInt(target.value, 10);
+        if(this.mathService.input1 < this.mathService.input2)
+          this.mathService.input2 = this.mathService.input1;
         break;
       case 'input2':
         this.mathService.input2 = parseInt(target.value, 10);
+        if(this.mathService.input2 > this.mathService.input1)
+          this.mathService.input1 = this.mathService.input2;
         break;
       default:
         break;
