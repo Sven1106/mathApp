@@ -1,6 +1,54 @@
-page-calculate {
-    
-}
+page-calculate {}
+
 .equation {
+    margin-top: 30px;
     text-align: center;
+    font-size: 48px;
+    text-align: center;
+
+    .answer {
+        
+        display: inline-block;
+        position: relative;
+        border-bottom: 1px solid black;
+        min-width: 50%;
+        margin: 0 auto;
+        margin-top: 15px;
+        padding-left: 30px;
+        &::before {
+            content: "=";
+            position: absolute;
+            left: 0;
+            border-bottom: 1px solid black;
+        }
+    }
+}
+
+.errorMsg {
+    visibility: hidden;
+    text-align: center;
+    margin-top: 48px;
+    font-size: 28px;
+    &.visible {
+        visibility: visible;
+    }
+    button{
+        height: 28px;
+    }
+}
+
+.numpad {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    button {
+        height: 40px;
+        width: 100%;
+        border-radius: 2px;
+        &:active {
+            transform: scale(0.9);
+        }
+    }
 }

@@ -47,13 +47,13 @@ export class HomePage {
   }
 
   ionViewWillLeave() {
-    // this.nativePageTransitions.slide(this.options)   
+    this.nativePageTransitions.slide(this.options)   
    }
 
   onClick() {
     this.hasSelected = this.mathService.getMathTypes.some(e => e.isSelected == true);
     if(this.hasSelected){
-      // this.nativePageTransitions.slide(this.options);
+      this.nativePageTransitions.slide(this.options);
       this.navCtrl.setRoot(CalculatePage);
     }
     else{

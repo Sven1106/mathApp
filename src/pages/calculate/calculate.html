@@ -10,12 +10,67 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <div class="equation">
-    {{equation}}
-  </div>
-  <form action="">
-      <input type="number" pattern="\d*" />
-      <input type="submit" value="submit"  (click)="checkIfCorrect($event);">
+  <form (ngSubmit)="checkIfCorrect($event)">
+    <div class="equation">
+      <div>{{equation.text}}</div>
+      <div class="answer" [innerHtml]="inputAnswer == '' ? '<br>' : inputAnswer"></div>
+      <div class="errorMsg" [class.visible]="error">
+        <div>{{errorMsg}}</div>
+        <button type="button" (click)="getNewEquation()">Spring over</button>
+      </div>
+    </div>
+
+
+    <div class="numpad">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <button type="button" value="1" (click)="inputAnswer = inputAnswer + '1'">1</button>
+          </ion-col>
+          <ion-col col-4>
+            <button type="button" value="2" (click)="inputAnswer = inputAnswer + '2'">2</button>
+          </ion-col>
+          <ion-col col-4>
+            <button type="button" value="3" (click)="inputAnswer = inputAnswer + '3'">3</button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <button type="button" value="4" (click)="inputAnswer = inputAnswer + '4'">4</button>
+          </ion-col>
+          <ion-col col-4>
+            <button type="button" value="5" (click)="inputAnswer = inputAnswer + '5'">5</button>
+          </ion-col>
+          <ion-col col-4>
+            <button type="button" value="6" (click)="inputAnswer = inputAnswer + '6'">6</button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <button type="button" value="7" (click)="inputAnswer = inputAnswer + '7'">7</button>
+          </ion-col>
+          <ion-col col-4>
+            <button type="button" value="8" (click)="inputAnswer = inputAnswer + '8'">8</button>
+          </ion-col>
+          <ion-col col-4>
+            <button type="button" value="9" (click)="inputAnswer = inputAnswer + '9'">9</button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-4>
+            <button type="button" (click)="inputAnswer = inputAnswer.substring(0, inputAnswer.length - 1)">
+              <ion-icon name="ios-backspace-outline"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button type="button" value="0" (click)="inputAnswer==''? '' : inputAnswer = inputAnswer + '0'">0</button>
+          </ion-col>
+          <ion-col col-4>
+            <button type="submit" [attr.disabled]="inputAnswer == ''? true: null">Svar</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </form>
 
 </ion-content>

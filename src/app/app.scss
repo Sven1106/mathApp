@@ -15,3 +15,9 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+$lineColor:  rgba(110, 196, 190, 0.25);
+ion-content{
+    box-sizing: border-box;
+    background-size: 5vw 5vw;
+    background-image: linear-gradient(to right, $lineColor 1px, transparent 1px), linear-gradient(to bottom, $lineColor 1px, transparent 1px);
+}
